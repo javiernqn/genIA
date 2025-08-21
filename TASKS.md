@@ -13,8 +13,8 @@
 - [x] Diseñar sistema de componentes UI
 - [ ] Crear pantallas de onboarding y registro
 - [x] Desarrollar dashboard principal
-- [ ] Implementar pantallas de pagos y transferencias
-- [ ] Crear interfaces de gestión de tarjetas
+- [x] Implementar pantallas de pagos y transferencias
+- [x] Crear interfaces de gestión de tarjetas
 - [x] Diseñar pantallas de servicios (recarga, lending, seguros)
 - [ ] Desarrollar historial de transacciones
 - [x] Implementar pantallas de ofertas personalizadas

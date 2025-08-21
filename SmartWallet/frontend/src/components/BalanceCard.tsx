@@ -48,10 +48,16 @@ export default function BalanceCard({ balance, currency = '$' }: BalanceCardProp
       </div>
       
       <div className="flex space-x-3">
-        <button className="flex-1 bg-blue-600 text-white py-3 px-4 rounded-xl font-medium hover:bg-blue-700 transition-colors">
-          Cargar dinero
+        <button 
+          onClick={() => window.location.href = '/payments'}
+          className="flex-1 bg-blue-600 text-white py-3 px-4 rounded-xl font-medium hover:bg-blue-700 transition-colors"
+        >
+          Pagar
         </button>
-        <button className="flex-1 border border-blue-600 text-blue-600 py-3 px-4 rounded-xl font-medium hover:bg-blue-50 transition-colors">
+        <button 
+          onClick={() => window.location.href = '/transfers'}
+          className="flex-1 border border-blue-600 text-blue-600 py-3 px-4 rounded-xl font-medium hover:bg-blue-50 transition-colors"
+        >
           Transferir
         </button>
       </div>

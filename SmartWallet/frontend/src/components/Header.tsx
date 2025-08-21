@@ -1,18 +1,23 @@
 import React from 'react';
+import BackButton from './BackButton';
 
 interface HeaderProps {
   title: string;
   subtitle?: string;
   showNotifications?: boolean;
+  showBackButton?: boolean;
 }
 
-export default function Header({ title, subtitle, showNotifications = true }: HeaderProps) {
+export default function Header({ title, subtitle, showNotifications = true, showBackButton = false }: HeaderProps) {
   return (
     <div className="bg-gradient-to-r from-blue-600 to-purple-700 px-4 py-6 text-white">
       <div className="flex justify-between items-start mb-4">
-        <div className="flex-1">
-          <h1 className="text-2xl font-bold">{title}</h1>
-          {subtitle && <p className="text-blue-100 text-sm mt-1">{subtitle}</p>}
+        <div className="flex items-center flex-1">
+          {showBackButton && <BackButton />}
+          <div className={showBackButton ? 'ml-2' : ''}>
+            <h1 className="text-2xl font-bold">{title}</h1>
+            {subtitle && <p className="text-blue-100 text-sm mt-1">{subtitle}</p>}
+          </div>
         </div>
         
         {showNotifications && (

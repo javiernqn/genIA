@@ -63,7 +63,13 @@ export default function ServicesGrid() {
             key={index}
             title={service.title}
             icon={service.icon}
-            onClick={() => console.log(`Clicked ${service.title}`)}
+            onClick={() => {
+              if (service.title === 'Mi negocio') {
+                window.location.href = '/cards';
+              } else {
+                console.log(`Clicked ${service.title}`);
+              }
+            }}
           />
         ))}
       </div>
