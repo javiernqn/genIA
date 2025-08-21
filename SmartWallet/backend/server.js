@@ -31,8 +31,9 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', message: 'SmartWallet API is running' });
 });
 
-// Auth routes placeholder
+// Routes
 app.use('/api/auth', require('./routes/auth'));
+app.use('/api/transactions', require('./routes/transactions'));
 
 app.listen(PORT, () => {
   console.log(`SmartWallet API running on port ${PORT}`);

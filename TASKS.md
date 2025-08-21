@@ -16,7 +16,7 @@
 - [x] Implementar pantallas de pagos y transferencias
 - [x] Crear interfaces de gestión de tarjetas
 - [x] Diseñar pantallas de servicios (recarga, lending, seguros)
-- [ ] Desarrollar historial de transacciones
+- [x] Desarrollar historial de transacciones
 - [x] Implementar pantallas de ofertas personalizadas
 - [ ] Crear interfaces de configuración de usuario
 - [ ] Desarrollar pantallas de notificaciones
@@ -32,7 +32,7 @@
 - [ ] Crear recarga de transporte
 - [ ] Desarrollar módulo de lending
 - [ ] Implementar sistema de seguros
-- [ ] Crear historial de transacciones
+- [x] Crear historial de transacciones
 
 ### 🧠 Fase 4: Personalización Inteligente
 - [ ] Integrar Google Maps API para geolocalización
