@@ -54,7 +54,7 @@ Una billetera virtual que personaliza ofertas y experiencias basándose en geolo
 
 ## 🛠️ Tecnologías
 
-- **Frontend**: React Native
+- **Frontend**: React / Next.js (PWA)
 - **Backend**: Node.js
 - **Base de Datos**: MongoDB / PostgreSQL
 - **ML/AI**: TensorFlow / scikit-learn
@@ -73,8 +73,8 @@ npm install
 # Configurar variables de entorno
 cp .env.example .env
 
-# Ejecutar aplicación
-npm start
+# Ejecutar aplicación web
+npm run dev
 ```
 
 ## 🔧 Configuración
