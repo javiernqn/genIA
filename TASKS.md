@@ -19,9 +19,10 @@
 - [ ] Desarrollar historial de transacciones
 - [x] Implementar pantallas de ofertas personalizadas
 - [ ] Crear interfaces de configuración de usuario
-- [ ] Desarrollar pantallas de notificaciones
+- [ ] Desarrollar historial de transacciones
 - [x] Implementar responsive design
-- [ ] Crear animaciones y transiciones
+- [x] Crear animaciones y transiciones
+- [x] Desarrollar historial de Notificaciones
 
 ### 🎯 Fase 3: Funcionalidades Core
 - [ ] Desarrollar sistema de pagos contactless y QR

@@ -22,12 +22,15 @@ export default function Header({ title, subtitle, showNotifications = true, show
         
         {showNotifications && (
           <div className="flex items-center space-x-3">
-            <button className="relative p-2">
+            <button 
+              onClick={() => window.location.href = '/notifications'}
+              className="relative p-2 hover:bg-white/10 rounded-lg transition-colors"
+            >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-5 5v-5z" />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4" />
               </svg>
-              <span className="absolute -top-1 -right-1 bg-red-500 text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+              <span className="absolute -top-1 -right-1 bg-red-500 text-xs rounded-full h-5 w-5 flex items-center justify-center animate-pulse">2</span>
             </button>
             
             <button className="p-2">
