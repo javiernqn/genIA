@@ -13,9 +13,19 @@ resource "aws_dynamodb_table" "merchants" {
     type = "S"
   }
 
+  attribute {
+    name = "province"
+    type = "S"
+  }
+
   global_secondary_index {
     name     = "CategoryIndex"
     hash_key = "category"
+  }
+
+  global_secondary_index {
+    name     = "ProvinceIndex"
+    hash_key = "province"
   }
 
   tags = var.tags

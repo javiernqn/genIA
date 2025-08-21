@@ -5,7 +5,7 @@ const dynamodb = new AWS.DynamoDB.DocumentClient();
 
 exports.handler = async (event) => {
   try {
-    const { username, latitude, longitude } = JSON.parse(event.body);
+    const { username, latitude, longitude, city, country, ip } = JSON.parse(event.body);
     
     // Validar usuario en DynamoDB
     const userParams = {
@@ -32,6 +32,9 @@ exports.handler = async (event) => {
           username,
           latitude,
           longitude,
+          city: city || null,
+          country: country || null,
+          ip: ip || null,
           timestamp: new Date().toISOString()
         }
       };

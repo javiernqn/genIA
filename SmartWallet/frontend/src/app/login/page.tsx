@@ -1,12 +1,27 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { validateUser } from '@/lib/auth';
+import { getLocationFromIP, LocationData } from '@/lib/location';
 
 export default function LoginPage() {
   const [usuario, setUsuario] = useState('');
   const [loading, setLoading] = useState(false);
+  const [locationInfo, setLocationInfo] = useState<string>('');
+
+  useEffect(() => {
+    // Obtener ubicación al cargar la página
+    const loadLocation = async () => {
+      try {
+        const location = await getLocationFromIP();
+        setLocationInfo(`${location.city}, ${location.country}`);
+      } catch (error) {
+        console.log('No se pudo obtener ubicación');
+      }
+    };
+    loadLocation();
+  }, []);
   const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -15,17 +30,50 @@ export default function LoginPage() {
     
     setLoading(true);
     
-    try {
-      const user = await validateUser(usuario);
+    // Validación para juan_19 y carlos_45
+    if (usuario === 'juan_19' || usuario === 'carlos_45') {
+      // Obtener geolocalización por IP
+      try {
+        const location = await getLocationFromIP();
+        const { city, country } = location;
+        setLocationInfo(`${city}, ${country}`);
+      } catch (error) {
+        console.log('Error obteniendo ubicación');
+      }
+      
+      // Datos mock según usuario
+      const mockUser = usuario === 'juan_19' 
+        ? { username: 'juan_19', age: 19, id: '1' }
+        : { username: 'carlos_45', age: 45, id: '2' };
       
       // Guardar token y datos del usuario
+      localStorage.setItem('token', 'fake-jwt-token');
+      localStorage.setItem('user', JSON.stringify(mockUser));
+      router.push('/');
+    } else {
+      alert('Usuario inexistente');
+      setLoading(false);
+      setLocationInfo('');
+    }
+    
+    // Código comentado - conexión a Lambda
+    /*
+    try {
+      const location = await getLocationFromIP();
+      const { city, country } = location;
+      setLocationInfo(`${city}, ${country}`);
+      
+      const user = await validateUser(usuario, location);
+      
       localStorage.setItem('token', 'fake-jwt-token');
       localStorage.setItem('user', JSON.stringify(user));
       router.push('/');
     } catch (error) {
       alert('Usuario inexistente');
       setLoading(false);
+      setLocationInfo('');
     }
+    */
   };
 
   return (
@@ -66,6 +114,12 @@ export default function LoginPage() {
           </button>
         </form>
       </div>
+      
+      {locationInfo && (
+        <div className="text-center text-purple-200 text-sm mt-4 animate-fade-in">
+          📍 Conectado desde: {locationInfo}
+        </div>
+      )}
       
       <div className="text-center text-purple-200 text-sm mt-8 animate-fade-in-delay-3">
         Tu billetera digital inteligente

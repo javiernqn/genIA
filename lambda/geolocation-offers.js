@@ -23,12 +23,25 @@ exports.handler = async (event) => {
 
     const user = userResult.Item;
     
-    // Buscar comercios cercanos
-    const merchantsParams = {
-      TableName: process.env.MERCHANTS_TABLE
-    };
+    // Buscar comercios por provincia si se proporciona
+    let merchantsResult;
+    if (event.queryStringParameters && event.queryStringParameters.province) {
+      const merchantsParams = {
+        TableName: process.env.MERCHANTS_TABLE,
+        IndexName: 'ProvinceIndex',
+        KeyConditionExpression: 'province = :province',
+        ExpressionAttributeValues: {
+          ':province': event.queryStringParameters.province
+        }
+      };
+      merchantsResult = await dynamodb.query(merchantsParams).promise();
+    } else {
+      const merchantsParams = {
+        TableName: process.env.MERCHANTS_TABLE
+      };
+      merchantsResult = await dynamodb.scan(merchantsParams).promise();
+    }
     
-    const merchantsResult = await dynamodb.scan(merchantsParams).promise();
     const nearbyMerchants = merchantsResult.Items.filter(merchant => {
       const distance = calculateDistance(
         latitude, longitude,
@@ -78,10 +91,12 @@ function generatePersonalizedOffers(merchants, user) {
       name: merchant.name,
       category: merchant.category,
       distance: Math.round(calculateDistance(
-        user.latitude || 0, user.longitude || 0,
+        latitude, longitude,
         merchant.latitude, merchant.longitude
       )),
-      address: merchant.address
+      address: merchant.address,
+      province: merchant.province,
+      city: merchant.city
     };
 
     // Personalizar por edad

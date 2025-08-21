@@ -1,4 +1,4 @@
-export const validateUser = async (username: string) => {
+export const validateUser = async (username: string, location: any) => {
   try {
     const response = await fetch('/api/login', {
       method: 'POST',
@@ -7,8 +7,11 @@ export const validateUser = async (username: string) => {
       },
       body: JSON.stringify({ 
         username,
-        latitude: -34.6037,
-        longitude: -58.3816
+        latitude: location.latitude,
+        longitude: location.longitude,
+        city: location.city,
+        country: location.country,
+        ip: location.ip
       })
     });
     

@@ -10,11 +10,13 @@ export interface Offer {
   tone: 'casual' | 'professional' | 'formal';
 }
 
-export const getNearbyOffers = async (latitude: number, longitude: number, radius: number = 5000): Promise<Offer[]> => {
+export const getNearbyOffers = async (latitude: number, longitude: number, radius: number = 5000, province?: string): Promise<Offer[]> => {
   try {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     
-    const response = await fetch('/api/nearby-offers', {
+    const url = province ? `/api/nearby-offers?province=${province}` : '/api/nearby-offers';
+    
+    const response = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import BackButton from '@/components/BackButton';
 
 interface Notification {
@@ -13,40 +13,93 @@ interface Notification {
 }
 
 export default function NotificationsPage() {
-  const [notifications, setNotifications] = useState<Notification[]>([
-    {
-      id: '1',
-      type: 'offer',
-      title: '🎉 Oferta especial',
-      message: '20% de descuento en Starbucks cerca tuyo',
-      time: '2 min',
-      read: false
-    },
-    {
-      id: '2',
-      type: 'cashback',
-      title: '💰 Cashback recibido',
-      message: 'Recibiste $150 de cashback por tu compra',
-      time: '1 hora',
-      read: false
-    },
-    {
-      id: '3',
-      type: 'transaction',
-      title: '✅ Pago exitoso',
-      message: 'Transferencia a María García completada',
-      time: '3 horas',
-      read: true
-    },
-    {
-      id: '4',
-      type: 'security',
-      title: '🔒 Inicio de sesión',
-      message: 'Nuevo acceso desde dispositivo móvil',
-      time: '1 día',
-      read: true
+  const [notifications, setNotifications] = useState<Notification[]>([]);
+  const [user, setUser] = useState<any>(null);
+
+  useEffect(() => {
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      try {
+        const parsedUser = JSON.parse(userData);
+        setUser(parsedUser);
+        
+        // Notificaciones según usuario
+        const userNotifications = parsedUser.username === 'juan_19' 
+          ? [
+              {
+                id: '1',
+                type: 'offer',
+                title: '📱 Oferta de celulares',
+                message: '30% OFF en iPhone 15 - Solo por hoy',
+                time: '5 min',
+                read: false
+              },
+              {
+                id: '2',
+                type: 'cashback',
+                title: '💰 Cashback gaming',
+                message: 'Recibiste $200 por compra en Steam',
+                time: '1 hora',
+                read: false
+              },
+              {
+                id: '3',
+                type: 'transaction',
+                title: '✅ Recarga exitosa',
+                message: 'Recarga de $500 en Personal completada',
+                time: '2 horas',
+                read: true
+              },
+              {
+                id: '4',
+                type: 'security',
+                title: '🔒 Login desde Buenos Aires',
+                message: 'Acceso desde nueva ubicación detectado',
+                time: '1 día',
+                read: true
+              }
+            ]
+          : [
+              {
+                id: '1',
+                type: 'offer',
+                title: '🚗 Oferta automotriz',
+                message: '15% OFF en service completo - YPF',
+                time: '10 min',
+                read: false
+              },
+              {
+                id: '2',
+                type: 'cashback',
+                title: '💰 Cashback combustible',
+                message: 'Recibiste $350 por carga de nafta',
+                time: '2 horas',
+                read: false
+              },
+              {
+                id: '3',
+                type: 'transaction',
+                title: '✅ Pago de seguro',
+                message: 'Cuota de seguro automotor pagada',
+                time: '4 horas',
+                read: true
+              },
+              {
+                id: '4',
+                type: 'security',
+                title: '🔒 Login desde Neuquén',
+                message: 'Acceso desde ubicación habitual',
+                time: '1 día',
+                read: true
+              }
+            ];
+        
+        setNotifications(userNotifications);
+      } catch (error) {
+        console.error('Error parsing user data');
+      }
     }
-  ]);
+  }, []);
 
   const markAsRead = (id: string) => {
     setNotifications(prev => 
@@ -70,8 +123,17 @@ export default function NotificationsPage() {
     <div className="min-h-screen bg-gray-50">
       <div className="bg-white shadow-sm">
         <div className="p-4">
-          <BackButton />
-          <h1 className="text-2xl font-bold text-gray-900 mt-4">Notificaciones</h1>
+          <div className="flex items-center space-x-4">
+            <button 
+              onClick={() => window.history.back()}
+              className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+            >
+              <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <h1 className="text-2xl font-bold text-gray-900">Notificaciones</h1>
+          </div>
         </div>
       </div>
 
