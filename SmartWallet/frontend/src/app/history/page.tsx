@@ -112,7 +112,7 @@ export default function HistoryPage() {
       </div>
 
       {/* Lista de transacciones */}
-      <div className="p-4 space-y-3">
+      <div className="p-4 space-y-3 animate-fade-in">
         {transactions.length === 0 ? (
           <div className="text-center py-12">
             <div className="text-6xl mb-4">📋</div>
@@ -124,10 +124,11 @@ export default function HistoryPage() {
             </p>
           </div>
         ) : (
-          transactions.map((transaction) => (
+          transactions.map((transaction, index) => (
             <div
               key={transaction._id}
-              className="bg-white rounded-lg p-4 shadow-sm border border-gray-100"
+              className="bg-white rounded-lg p-4 shadow-sm border border-gray-100 hover:scale-105 transition-all duration-300 transform"
+              style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">

@@ -16,12 +16,13 @@
 - [x] Implementar pantallas de pagos y transferencias
 - [x] Crear interfaces de gestión de tarjetas
 - [x] Diseñar pantallas de servicios (recarga, lending, seguros)
-- [x] Desarrollar historial de transacciones
+- [ ] Desarrollar historial de transacciones
 - [x] Implementar pantallas de ofertas personalizadas
 - [ ] Crear interfaces de configuración de usuario
-- [ ] Desarrollar pantallas de notificaciones
+- [ ] Desarrollar historial de transacciones
 - [x] Implementar responsive design
-- [ ] Crear animaciones y transiciones
+- [x] Crear animaciones y transiciones
+- [x] Desarrollar historial de Notificaciones
 
 ### 🎯 Fase 3: Funcionalidades Core
 - [ ] Desarrollar sistema de pagos contactless y QR
@@ -32,7 +33,7 @@
 - [ ] Crear recarga de transporte
 - [ ] Desarrollar módulo de lending
 - [ ] Implementar sistema de seguros
-- [x] Crear historial de transacciones
+- [ ] Crear historial de transacciones
 
 ### 🧠 Fase 4: Personalización Inteligente
 - [ ] Integrar Google Maps API para geolocalización

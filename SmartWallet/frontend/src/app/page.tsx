@@ -22,7 +22,7 @@ export default function Home() {
       <div className="px-4 py-2">
         <button 
           onClick={() => window.location.href = '/history'}
-          className="w-full bg-white rounded-lg p-4 shadow-sm border border-gray-100 flex items-center justify-between hover:bg-gray-50 transition-colors"
+          className="w-full bg-white rounded-lg p-4 shadow-sm border border-gray-100 flex items-center justify-between hover:bg-gray-50 hover:scale-105 transition-all duration-300 transform active:scale-95"
         >
           <div className="flex items-center space-x-3">
             <div className="text-2xl">📋</div>
@@ -39,10 +39,10 @@ export default function Home() {
       
       <div className="px-4 py-6">
         <h3 className="text-lg font-semibold text-gray-900 mb-4">Ofertas personalizadas</h3>
-        <div className="bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl p-6 text-white">
+        <div className="bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl p-6 text-white hover:scale-105 transition-all duration-300 transform">
           <h4 className="text-xl font-bold mb-2">¡Oferta especial!</h4>
           <p className="text-purple-100 mb-4">20% de descuento en restaurantes cercanos</p>
-          <button className="bg-white text-purple-600 px-6 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors">
+          <button className="bg-white text-purple-600 px-6 py-2 rounded-lg font-medium hover:bg-gray-100 hover:scale-105 transition-all duration-200 transform active:scale-95">
             Ver ofertas
           </button>
         </div>
