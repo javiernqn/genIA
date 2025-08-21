@@ -1,30 +1,21 @@
-const mongoose = require('mongoose');
+const AWS = require('aws-sdk');
 const jwt = require('jsonwebtoken');
 
-const userSchema = new mongoose.Schema({
-  username: { type: String, required: true, unique: true, trim: true }
-}, { timestamps: true });
-
-const User = mongoose.model('User', userSchema);
-
-let cachedDb = null;
-
-const connectToDatabase = async () => {
-  if (cachedDb) return cachedDb;
-  
-  const db = await mongoose.connect(process.env.MONGODB_URI);
-  cachedDb = db;
-  return db;
-};
+const dynamodb = new AWS.DynamoDB.DocumentClient();
 
 exports.handler = async (event) => {
   try {
-    await connectToDatabase();
+    const { username, latitude, longitude } = JSON.parse(event.body);
     
-    const { username } = JSON.parse(event.body);
+    // Validar usuario en DynamoDB
+    const userParams = {
+      TableName: process.env.USERS_TABLE,
+      Key: { username }
+    };
     
-    const user = await User.findOne({ username });
-    if (!user) {
+    const userResult = await dynamodb.get(userParams).promise();
+    
+    if (!userResult.Item) {
       return {
         statusCode: 401,
         headers: { 'Content-Type': 'application/json' },
@@ -32,8 +23,24 @@ exports.handler = async (event) => {
       };
     }
 
+    // Registrar geolocalización
+    if (latitude && longitude) {
+      const geoParams = {
+        TableName: process.env.GEOLOCATION_TABLE,
+        Item: {
+          id: `${username}-${Date.now()}`,
+          username,
+          latitude,
+          longitude,
+          timestamp: new Date().toISOString()
+        }
+      };
+      
+      await dynamodb.put(geoParams).promise();
+    }
+
     const token = jwt.sign(
-      { userId: user._id, username: user.username },
+      { userId: userResult.Item.id, username: userResult.Item.username },
       process.env.JWT_SECRET,
       { expiresIn: '24h' }
     );
@@ -43,7 +50,7 @@ exports.handler = async (event) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         token,
-        user: { id: user._id, username: user.username }
+        user: { id: userResult.Item.id, username: userResult.Item.username }
       })
     };
   } catch (error) {

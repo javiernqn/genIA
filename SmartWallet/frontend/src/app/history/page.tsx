@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import BackButton from '@/components/BackButton';
+import Header from '@/components/Header';
 import { getTransactions } from '@/lib/api';
 
 interface Transaction {
@@ -68,8 +68,13 @@ export default function HistoryPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 p-4">
-        <BackButton />
+      <div className="min-h-screen bg-gray-50">
+        <Header 
+          title="Historial" 
+          subtitle="Cargando..."
+          showBackButton={true}
+          showNotifications={false}
+        />
         <div className="flex justify-center items-center h-64">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
         </div>
@@ -79,14 +84,16 @@ export default function HistoryPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <Header 
+        title="Historial" 
+        subtitle="Todas tus transacciones"
+        showBackButton={true}
+        showNotifications={false}
+      />
       <div className="bg-white shadow-sm">
-        <div className="p-4">
-          <BackButton />
-          <h1 className="text-2xl font-bold text-gray-900 mt-4">Historial</h1>
-        </div>
         
         {/* Filtros */}
-        <div className="px-4 pb-4">
+        <div className="px-4 pb-4 pt-2">
           <div className="flex space-x-2 overflow-x-auto">
             {[
               { key: 'all', label: 'Todas' },

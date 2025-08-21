@@ -20,11 +20,11 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 
-// Database connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/smartwallet', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+// Database connection (commented out for now)
+// mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/smartwallet', {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
 
 // Routes
 app.get('/api/health', (req, res) => {
@@ -32,8 +32,8 @@ app.get('/api/health', (req, res) => {
 });
 
 // Routes
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/transactions', require('./routes/transactions'));
+app.use('/api/auth', require('./routes/auth-simple'));
+// app.use('/api/transactions', require('./routes/transactions'));
 
 app.listen(PORT, () => {
   console.log(`SmartWallet API running on port ${PORT}`);

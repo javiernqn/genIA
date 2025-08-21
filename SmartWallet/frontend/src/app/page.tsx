@@ -1,14 +1,31 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Header from '@/components/Header';
 import BalanceCard from '@/components/BalanceCard';
 import ServicesGrid from '@/components/ServicesGrid';
 
 export default function Home() {
+  const router = useRouter();
+  const [user, setUser] = useState<any>(null);
+
+  useEffect(() => {
+    // Verificar si hay token de autenticación
+    const token = localStorage.getItem('token');
+    if (!token) {
+      router.push('/login');
+    } else {
+      const userData = localStorage.getItem('user');
+      if (userData) {
+        setUser(JSON.parse(userData));
+      }
+    }
+  }, [router]);
   return (
     <main className="min-h-screen bg-gray-50">
       <Header 
-        title="Hola, Juan" 
+        title={`Hola, ${user?.username || 'Usuario'}`} 
         subtitle="Bienvenido a SmartWallet"
       />
       
@@ -21,7 +38,10 @@ export default function Home() {
         <div className="bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl p-6 text-white hover:scale-105 transition-all duration-300 transform">
           <h4 className="text-xl font-bold mb-2">¡Oferta especial!</h4>
           <p className="text-purple-100 mb-4">20% de descuento en restaurantes cercanos</p>
-          <button className="bg-white text-purple-600 px-6 py-2 rounded-lg font-medium hover:bg-gray-100 hover:scale-105 transition-all duration-200 transform active:scale-95">
+          <button 
+            onClick={() => window.location.href = '/offers'}
+            className="bg-white text-purple-600 px-6 py-2 rounded-lg font-medium hover:bg-gray-100 hover:scale-105 transition-all duration-200 transform active:scale-95"
+          >
             Ver ofertas
           </button>
         </div>

@@ -2,21 +2,30 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { validateUser } from '@/lib/auth';
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('');
+  const [usuario, setUsuario] = useState('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
+    if (!usuario) return;
     
     setLoading(true);
     
-    setTimeout(() => {
+    try {
+      const user = await validateUser(usuario);
+      
+      // Guardar token y datos del usuario
+      localStorage.setItem('token', 'fake-jwt-token');
+      localStorage.setItem('user', JSON.stringify(user));
       router.push('/');
-    }, 500);
+    } catch (error) {
+      alert('Usuario inexistente');
+      setLoading(false);
+    }
   };
 
   return (
@@ -33,24 +42,24 @@ export default function LoginPage() {
             </div>
             <h1 className="text-3xl font-light text-white mb-2 animate-fade-in-delay">Personal Pay</h1>
           </div>
-          <p className="text-purple-100 text-lg animate-fade-in-delay-2">Ingresá tu email</p>
+          <p className="text-purple-100 text-lg animate-fade-in-delay-2">Ingresá tu usuario</p>
         </div>
 
         <form onSubmit={handleLogin} className="space-y-8 animate-slide-up-delay">
           <div>
             <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              type="text"
+              value={usuario}
+              onChange={(e) => setUsuario(e.target.value)}
               className="w-full px-0 py-4 bg-transparent border-0 border-b-2 border-purple-200 text-white placeholder-purple-200 text-lg focus:ring-0 focus:border-white focus:outline-none transition-all duration-500 focus:scale-105 focus:border-b-4 focus:py-5"
-              placeholder="Email"
+              placeholder="Usuario"
               required
             />
           </div>
 
           <button
             type="submit"
-            disabled={loading || !email}
+            disabled={loading || !usuario}
             className="w-full bg-white text-purple-600 py-4 rounded-full font-semibold text-lg hover:bg-purple-50 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 shadow-lg transform active:scale-95"
           >
             {loading ? 'Ingresando...' : 'Continuar'}
