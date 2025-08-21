@@ -16,6 +16,17 @@ export default function Home() {
         <BalanceCard balance={125000} />
       </div>
       
+      <div className="px-4 py-6">
+        <h3 className="text-lg font-semibold text-gray-900 mb-4">Ofertas personalizadas</h3>
+        <div className="bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl p-6 text-white hover:scale-105 transition-all duration-300 transform">
+          <h4 className="text-xl font-bold mb-2">¡Oferta especial!</h4>
+          <p className="text-purple-100 mb-4">20% de descuento en restaurantes cercanos</p>
+          <button className="bg-white text-purple-600 px-6 py-2 rounded-lg font-medium hover:bg-gray-100 hover:scale-105 transition-all duration-200 transform active:scale-95">
+            Ver ofertas
+          </button>
+        </div>
+      </div>
+      
       <ServicesGrid />
       
       {/* Acceso rápido al historial */}
@@ -35,17 +46,6 @@ export default function Home() {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
         </button>
-      </div>
-      
-      <div className="px-4 py-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Ofertas personalizadas</h3>
-        <div className="bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl p-6 text-white hover:scale-105 transition-all duration-300 transform">
-          <h4 className="text-xl font-bold mb-2">¡Oferta especial!</h4>
-          <p className="text-purple-100 mb-4">20% de descuento en restaurantes cercanos</p>
-          <button className="bg-white text-purple-600 px-6 py-2 rounded-lg font-medium hover:bg-gray-100 hover:scale-105 transition-all duration-200 transform active:scale-95">
-            Ver ofertas
-          </button>
-        </div>
       </div>
     </main>
   )
