@@ -21,6 +21,11 @@ Una billetera virtual que personaliza ofertas y experiencias basándose en geolo
 - Historial detallado de transacciones
 - Notificaciones push personalizadas
 
+### Business Intelligence
+- **Reportes de Convenios**: Análisis de comercios prioritarios para alianzas estratégicas
+- **Análisis de Gastos Agregados**: Identificación de oportunidades comerciales por volumen
+- **Scoring de Comercios**: Evaluación de potencial de convenios basado en datos de clientes
+
 ## 🎯 Personalización por Usuario
 
 ### Por Edad
@@ -114,6 +119,12 @@ export const PersonalizationConfig = {
 - **Respuesta a Incentivos**: Tracking de interacciones y conversiones
 - **Fatiga de Notificaciones**: Algoritmo anti-spam basado en respuestas
 - **Scoring de Receptividad**: Puntuación dinámica por horario y contexto
+
+### Inteligencia de Negocios
+- **Análisis de Volumen por Comercio**: Ranking de gastos agregados por establecimiento
+- **Identificación de Oportunidades**: Comercios con alto potencial de convenios
+- **ROI de Convenios**: Proyección de beneficios por alianzas comerciales
+- **Segmentación de Comercios**: Categorización por volumen, frecuencia y rentabilidad
 
 ## 🤝 Contribuir
 
